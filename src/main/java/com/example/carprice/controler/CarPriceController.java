@@ -11,17 +11,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/carprice")
+@RequestMapping("/car")
 @RequiredArgsConstructor
 public class CarPriceController {
     private final AnnounceService announceService;
 
-    @GetMapping("/announces")
+    @GetMapping
     public List<Announce> getAllAnnounce() {
         return announceService.getAllAnnounce();
     }
 
-    @GetMapping("/announces/{date}")
+    @GetMapping("/{date}")
     public List<Announce> getAnnouncesByDate(@PathVariable LocalDate date) {
         return announceService.getAnnouncesByDate(date);
     }
@@ -34,13 +34,13 @@ public class CarPriceController {
         return announceService.getAnnouncesByParam(brand, color, price, model);
     }
 
-    @PostMapping("/new-announce")
+    @PostMapping
     public ResponseEntity<Integer> createAnnounce(@RequestBody AnnounceDto announceDto) {
         announceService.createAnnounce(announceDto);
         return ResponseEntity.status(201).build();
     }
 
-    @DeleteMapping("/delete-announce/{id}")
+    @DeleteMapping("/{id}")
     public void deleteAnnounceById(@PathVariable Integer id) {
         announceService.deleteAnnounceById(id);
     }
